@@ -10,73 +10,7 @@ var locationOptions = {
 	enableHighAccuracy: true 
 };
 
-
-
-//when the jQuery Mobile page is initialised
-$(document).on('pageinit', function() {
-	
-    console.log("Ready");
-    
-  
-    
-    Backendless.Data.of("Position").find().then(append).catch(error);
-	updatePosition();
-    
-});
-
-
-
-//Call this function when you want to watch for chnages in position
-function updatePosition() {
-	
-    console.log("updatePosition");
-
-	//instruct location service to get position with appropriate callbacks
-	watchID = navigator.geolocation.getCurrentPosition(successPosition, failPosition, locationOptions);
-}
-
-//Call this function when you want to watch for chnages in position
-function stopPosition() {
-	
-	//change time box to show updated message
-	$('#time').val("Press the button to get location data");
-	
-	//instruct location service to get position with appropriate callbacks
-	navigator.geolocation.clearWatch(watchID);
-}
-
-
-//called when the position is successfully determined
-function successPosition(position) {
-	
-	
-	//lets get some stuff out of the position object
-	var time = position.timestamp;
-	var latitude = position.coords.latitude;
-	var longitude = position.coords.longitude;
-
-   
-    initMap(latitude, longitude);
-	
-}
-
-//called if the position is not obtained correctly
-function failPosition(error) {
-	//change time box to show updated message
-	$('#time').val("Error getting data: " + error);
-	
-}
-
-function initMap(latitude, longitude) {
-    
-    console.log("initMap");
-
-    
-    
-  nmap = new google.maps.Map(document.getElementById('nmap'), {
-    zoom: 16,
-    center: {lat: latitude, lng: longitude},  // Center the map on Worcester, UK.
-    styles: [
+var nighStyle = [
             {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
             {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
@@ -155,9 +89,86 @@ function initMap(latitude, longitude) {
               elementType: 'labels.text.stroke',
               stylers: [{color: '#17263c'}]
             }
-          ]
-        }); 
+          ];
+
+var nightOptions = {name: 'Night map'};
+
+
+//when the jQuery Mobile page is initialised
+$(document).on('pageinit', function() {
+	
+    console.log("Ready");
     
+  
+    
+    Backendless.Data.of("Position").find().then(append).catch(error);
+	updatePosition();
+    
+});
+
+
+
+//Call this function when you want to watch for chnages in position
+function updatePosition() {
+	
+    console.log("updatePosition");
+
+	//instruct location service to get position with appropriate callbacks
+	watchID = navigator.geolocation.getCurrentPosition(successPosition, failPosition, locationOptions);
+}
+
+//Call this function when you want to watch for chnages in position
+function stopPosition() {
+	
+	//change time box to show updated message
+	$('#time').val("Press the button to get location data");
+	
+	//instruct location service to get position with appropriate callbacks
+	navigator.geolocation.clearWatch(watchID);
+}
+
+
+//called when the position is successfully determined
+function successPosition(position) {
+	
+	
+	//lets get some stuff out of the position object
+	var time = position.timestamp;
+	var latitude = position.coords.latitude;
+	var longitude = position.coords.longitude;
+
+   
+    initMap(latitude, longitude);
+	
+}
+
+//called if the position is not obtained correctly
+function failPosition(error) {
+	//change time box to show updated message
+	$('#time').val("Error getting data: " + error);
+	
+}
+
+function initMap(latitude, longitude) {
+    
+    console.log("initMap");
+
+    var nightMapType = new google.maps.StyledMapType(nighStyle,nightOptions);
+    
+    
+    
+    
+  nmap = new google.maps.Map(document.getElementById('nmap'), {
+    zoom: 16,
+    center: {lat: latitude, lng: longitude}  // Center the map on Worcester, UK.
+   }); 
+    
+    nmap.mapTypes.set('nightMap',nightMapType);
+    
+    
+    nmap.setMapTypeId('nightMap');    
+    nmap.setMapTypeId('satellite');
+    nmap.setMapTypeId('roadmap');
     
     var infoWindow = new google.maps.InfoWindow({map: nmap});
     

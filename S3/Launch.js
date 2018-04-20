@@ -19,10 +19,10 @@ function onPageShow() {
 } 
 
 function onReady(){
-    Backendless.Data.of( "Register" ).find().then(recognize).catch(error);
+    Backendless.Data.of( user ).find().then(recognize).catch(error);
 }
 
-function recognize(register) {
+function recognize(user) {
 		console.log("launch button clicked");
         var user = $("#user").val();
         var pass = $("#pass").val();
@@ -31,7 +31,13 @@ function recognize(register) {
     'Username error',            // title
     'Done'                  // buttonName
 );
- if(pass=='') alert("Please enter your password."); 
+ if(pass=='') alert("Please enter your password.");
+    
+
+    Backendless.UserService.login( login, password, stayLoggedIn ).then( function( loggedInUser ) {
+   }).catch( function( error ) {
+   });
+    
         console.log(register[0].Username);
         var j = 0;
      for(var i = 0; i < register.length; i++){

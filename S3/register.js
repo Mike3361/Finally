@@ -33,31 +33,41 @@ function recognize(){
 
 function onAddTask() {
 		console.log("add task button clicked");
-        var username = $("#username").val();
-        var email = $("#email").val();
-        var password = $("#password").val();
     
-        var newTask = {
-         username,
-         email,
-        password};
+       // var newTask = {
+    //     username,
+//         email,
+//        password};
     
-        Backendless.Data.of("Register").save(newTask).then(saved).catch(error);
-         
+    
+    
+   //     Backendless.Data.of("Register").save(newTask).then(saved).catch(error);
+    
+    var user = new Backendless.User();
+    user.email = $("#email").val();
+    user.password = $("#password").val();
+    
+    
+    Backendless.UserService.register( user ).then( userRegistered ).catch( gotError );
 
 }
 
-function saved(savedTask) { 
-      console.log( "new Contact instance has been saved" + savedTask);
-    alert("Register successfully.");
+
+
+function userRegistered( user )
+{
+  console.log( "user has been registered" );
     window.location.href='index.html';
 }
-
-
-
-function error(err) {
-    checkConnection();
+ 
+function gotError( err ) // see more on error handling
+{
+  console.log( "error message - " + err.message );
+  console.log( "error code - " + err.statusCode );
+      checkConnection();
 }
+
+
 
 function checkConnection() {
     var networkState = navigator.connection.type;
