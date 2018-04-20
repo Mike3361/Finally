@@ -73,14 +73,93 @@ function initMap(latitude, longitude) {
 
     
     
-  map = new google.maps.Map(document.getElementById('map'), {
+  nmap = new google.maps.Map(document.getElementById('nmap'), {
     zoom: 16,
-    center: {lat: latitude, lng: longitude}  // Center the map on Worcester, UK.
-  });
+    center: {lat: latitude, lng: longitude},  // Center the map on Worcester, UK.
+    styles: [
+            {elementType: 'geometry', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.stroke', stylers: [{color: '#242f3e'}]},
+            {elementType: 'labels.text.fill', stylers: [{color: '#746855'}]},
+            {
+              featureType: 'administrative.locality',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'geometry',
+              stylers: [{color: '#263c3f'}]
+            },
+            {
+              featureType: 'poi.park',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#6b9a76'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry',
+              stylers: [{color: '#38414e'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#212a37'}]
+            },
+            {
+              featureType: 'road',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#9ca5b3'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry',
+              stylers: [{color: '#746855'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'geometry.stroke',
+              stylers: [{color: '#1f2835'}]
+            },
+            {
+              featureType: 'road.highway',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#f3d19c'}]
+            },
+            {
+              featureType: 'transit',
+              elementType: 'geometry',
+              stylers: [{color: '#2f3948'}]
+            },
+            {
+              featureType: 'transit.station',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#d59563'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'geometry',
+              stylers: [{color: '#17263c'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.fill',
+              stylers: [{color: '#515c6d'}]
+            },
+            {
+              featureType: 'water',
+              elementType: 'labels.text.stroke',
+              stylers: [{color: '#17263c'}]
+            }
+          ]
+        }); 
     
     
-    
-    var infoWindow = new google.maps.InfoWindow({map: map});
+    var infoWindow = new google.maps.InfoWindow({map: nmap});
     
      var pos = {
               lat: latitude,
@@ -90,22 +169,22 @@ function initMap(latitude, longitude) {
    console.log(pos.lat);
               var marker= new google.maps.Marker({
                   position:pos,                                               // make a mark on the map
-                  map:map,
+                  map:nmap,
                   
               });
             infoWindow.setPosition(pos);
             infoWindow.setContent('Location found.');
     
 
-  poly = new google.maps.Polyline({
+  npoly = new google.maps.Polyline({
     strokeColor: '#000000',
     strokeOpacity: 1.0,
     strokeWeight: 3
   });
-  poly.setMap(map);
+  npoly.setMap(nmap);
 
   // Add a listener for the click event
-  map.addListener('click', addLatLng);
+  nmap.addListener('click', addLatLng);
     
      
 }
@@ -121,7 +200,7 @@ function addLatLng(event) {
   var marker = new google.maps.Marker({
     position: event.latLng,
     title: 'new marker',
-    map: map
+    map: nmap
   });
     
    
@@ -145,7 +224,7 @@ function  append(Position) {
         console.log(Position[i]);
         var marker = new google.maps.Marker({
             position:{lat: Position[i].lat, lng: Position[i].lng}, 
-            map: map
+            map: nmap
         });
     }
     
