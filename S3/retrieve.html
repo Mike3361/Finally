@@ -7,21 +7,18 @@
 		<script src="jquerymobile/jquery.mobile-1.4.5.min.js" type="text/javascript"></script>
     	<script src="cordova.js"></script>
         <script src="backendless.js"></script>
-        <script src="Launch.js"></script>
+        <script src="retrieve.js"></script>
 	</head>
     
     <body>	
-    	<div data-role="page" id="launchpage">
+    	<div data-role="page" id="retrieve">
       		
       
       		<div data-role="content">
         	
-            	Username: <input type="text" name="user" id="user" value="" placeholder="" />
-                Password: <input type="password" name="pass" id="pass" value="" placeholder="" />
+            	Email address: <input type="text" name="emailaddress" id="emailaddress" value="" placeholder="" />
                 
-                <input type="button" id="launch" value="Sign in" />
-                <input onclick=window.location.href='Register.html' type="button" id="signup" value="Sign up" />
-                <a href= 'retrieve.html'>Forget password?</a>
+                <input onclick=window.location.href='index.html' type="button" id="return" value="Return" />
                 
 
     		</div>
