@@ -21,7 +21,6 @@ $(document).on('pageinit', function() {
     
     Backendless.Data.of("Position").find().then(append).catch(error);
 	updatePosition();
-	checkConnection();
     
 });
 

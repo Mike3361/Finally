@@ -11,7 +11,7 @@ function onPageShow() {
 	
     
     $(document).on("click", "#launch", onReady);
-   checkConnection();
+   
     
 	
 
@@ -56,13 +56,13 @@ function recognize(register) {
 
 
 function error(err) {
-    alert("This account does not exist.");
+    checkConnection();
 }
 
 function checkConnection() {
     var networkState = navigator.connection.type;
  
-    if(networkState = none)
+    if(networkState = "none")
  
     alert('Connection type: No network connection');
 }

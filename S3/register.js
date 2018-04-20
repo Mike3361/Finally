@@ -10,7 +10,7 @@ function onPageShow() {
 	//run a query
     
     $(document).on("click", "#register", recognize);
-checkConnection();
+
 	
 
 
@@ -56,7 +56,7 @@ function saved(savedTask) {
 
 
 function error(err) {
-    alert("Email or Username you entered is already existed." );
+    checkConnection();
 }
 
 function checkConnection() {
