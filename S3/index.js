@@ -161,7 +161,7 @@ function checkConnection() {
     var networkState = navigator.connection.type;
  
     var states = {};
-    states[Connection.NONE]     = 'No network connection';
+    if(states[Connection.NONE])
  
-    alert('Connection type: ' + states[networkState]);
+    alert('Connection type: No network connection');
 }
