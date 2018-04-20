@@ -153,13 +153,13 @@ function  append(Position) {
 }
 
 function error(err) {
-    alert(err);
+     checkConnection();
 }
 
 function checkConnection() {
     var networkState = navigator.connection.type;
  
-    if(networkState = none)
+    if(networkState = "none")
  
     alert('Connection type: No network connection');
 }
